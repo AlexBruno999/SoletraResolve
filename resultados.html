@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados</title>
+    <link rel="stylesheet" href="resultados.css">
+</head>
+<body>
+    <h1>Resultados</h1>
+    <div id="results"></div>
+    <button id="novaBusca">Nova Busca</button>
+    <div class="signature">Desenvolvido por Alek</div>
+    <script>
+        // Recupera os dados do localStorage
+        const groupedWords = JSON.parse(localStorage.getItem('groupedWords'));
+
+        // Exibe os resultados na página
+        const resultsDiv = document.getElementById('results');
+        if (groupedWords) {
+            for (const length in groupedWords) {
+                const words = groupedWords[length];
+                const box = document.createElement('div');
+                box.className = 'result-box';
+                box.innerHTML = `<h2>Palavras com ${length} letras:</h2>`;
+                box.innerHTML += `<ul>${words.map(word => `<li>${word}</li>`).join('')}</ul>`;
+                resultsDiv.appendChild(box);
+            }
+        } else {
+            resultsDiv.innerHTML = '<p>Nenhuma palavra encontrada.</p>';
+        }
+
+        document.getElementById('novaBusca').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+        
+    </script>
+</body>
+</html>
